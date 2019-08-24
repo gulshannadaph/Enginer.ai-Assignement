@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TestClass {
@@ -28,12 +29,14 @@ public class TestClass {
 		
 		Actions action = new Actions(driver);
 		action.moveToElement(rfill).build().perform();
+		Thread.sleep(3000);
+		WebElement rfillAfterHover = driver.findElement(By.id("R-fill"));
 		
+		String classAttribute = rfillAfterHover.getAttribute("class");
 		
-		
-		
-		
-		
+		Assert.assertEquals(classAttribute, "black", "Assert failed, colour did not change!");
+		driver.quit();
+			
 		
 	}
 	
