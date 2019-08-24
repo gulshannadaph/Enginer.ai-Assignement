@@ -22,21 +22,37 @@ public class TestClass {
 		driver.manage().window().maximize();
 		
 		WebElement rfill = driver.findElement(By.id("R-fill"));
-		WebElement gfill = driver.findElement(By.id("G-fill"));
 		WebElement bfill = driver.findElement(By.id("B-fill"));
 		
+		// R-fill
 		Thread.sleep(3000);
-		
 		Actions action = new Actions(driver);
 		action.moveToElement(rfill).build().perform();
+		
 		Thread.sleep(3000);
 		WebElement rfillAfterHover = driver.findElement(By.id("R-fill"));
+		String rClassAttribute = rfillAfterHover.getAttribute("class");
+		Assert.assertEquals(rClassAttribute, "black", "Assert failed, colour did not change!");
 		
-		String classAttribute = rfillAfterHover.getAttribute("class");
 		
-		Assert.assertEquals(classAttribute, "black", "Assert failed, colour did not change!");
-		driver.quit();
-			
+		WebElement body = driver.findElement(By.tagName("body"));
+		body.click();
+		
+		// G-fill
+		WebElement gfill = driver.findElement(By.id("G-fill"));
+		Thread.sleep(3000);
+		Actions gFillaction = new Actions(driver);
+		gFillaction.moveToElement(gfill).build().perform();
+
+		Thread.sleep(2000);
+		
+		WebElement gfillAfterHover = driver.findElement(By.id("G-fill"));
+//		Thread.sleep(3000);
+		String gClassAttribute = gfillAfterHover.getAttribute("class");
+//		Thread.sleep(1000);
+		Assert.assertEquals(gClassAttribute, "black", "Assert failed, colour did not change!");
+				
+		driver.quit();	
 		
 	}
 	
